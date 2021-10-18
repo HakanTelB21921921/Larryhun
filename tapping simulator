@@ -1,5 +1,7 @@
 local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/discord%20lib.txt")()
 
+local script = loadstring(game:HttpGet("https://raw.githubusercontent.com/HakanTelB21921921/Larryhun/main/tapping%20simulator"))()
+
 local win = DiscordLib:Window("Larryhun")
 
 local serv = win:Server("Tapping Simulator", "")
@@ -7,7 +9,6 @@ local serv = win:Server("Tapping Simulator", "")
 local btns = serv:Channel("Teleports")
 
 btns:Button("Kill all", function()
-DiscordLib:Notification("Notification", "Killed everyone!", "Okay!")
 end)
 
 btns:Seperator()
@@ -77,7 +78,7 @@ function doBigTap()
 	spawn(function()
 		while getgenv().autoBigTap == true do
 			game:GetService("ReplicatedStorage").TapSplosion:InvokeServer()
-			wait()
+			wait(120)
 		end
 	end)
 end
