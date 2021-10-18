@@ -1,0 +1,83 @@
+local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/discord%20lib.txt")()
+
+local win = DiscordLib:Window("Larryhun")
+
+local serv = win:Server("Tapping Simulator", "")
+
+local btns = serv:Channel("Teleports")
+
+btns:Button("Kill all", function()
+DiscordLib:Notification("Notification", "Killed everyone!", "Okay!")
+end)
+
+btns:Seperator()
+
+btns:Button("Get max level", function()
+DiscordLib:Notification("Notification", "Max level!", "Okay!")
+end)
+
+local tgls = serv:Channel("Auto")
+
+getgenv().autoTap = true;
+getgenv().autoRebirth = true;
+
+tgls:Toggle("Auto-Tap",false, function(bool)
+getgenv().autoTap = bool
+    print("Auto tap is", bool)
+    if bool then
+        doTap();
+    end
+end)
+
+tgls:Toggle("Auto-Rebirth",false, function(bool)
+getgenv().autoRebirth = bool
+    print("Auto rebirth is", bool)
+    if bool then
+        doRebirth();
+    end
+end)
+
+local pet = serv:Channel("Pet")
+
+getgenv().autoOpenPet = true;
+
+pet:Toggle("Auto-Open-Pet",false, function(bool)
+getgenv().autoOpenPet = bool
+    print("Auto open pet is", bool)
+    if bool then
+        doPet();
+    end
+end)
+
+
+function doTap()
+    spawn(function()
+        while getgenv().autoTap == true do
+            local args = {[1] = false,}
+            game:GetService("ReplicatedStorage").PlayerClick:FireServer(unpack(args))
+            wait()
+        end
+    end)
+end
+
+function doRebirth()
+    spawn(function()
+        while getgenv().autoRebirth == true do
+            local args = {[1] = 50,}
+            game:GetService("ReplicatedStorage").PlayerRebirth:FireServer(unpack(args))
+            wait()
+        end
+    end)
+end
+
+function doPet()
+    spawn(function()
+        while getgenv().autoOpenPet == true do
+            local args = {[1] = "StandardShop",[2] = 3,}
+            game:GetService("ReplicatedStorage").PetStoreRoll:InvokeServer(unpack(args))
+            wait()
+        end
+    end)
+end
+
+win:Server("Main", "http://www.roblox.com/asset/?id=6031075938")
