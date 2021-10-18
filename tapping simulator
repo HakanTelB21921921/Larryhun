@@ -20,6 +20,7 @@ local tgls = serv:Channel("Auto")
 
 getgenv().autoTap = true;
 getgenv().autoRebirth = true;
+getgenv().autoBigTap = true;
 
 tgls:Toggle("Auto-Tap",false, function(bool)
 DiscordLib:Notification("Notification", "Auto tap is Enabled!", "Okay!")
@@ -30,8 +31,17 @@ getgenv().autoTap = bool
     end
 end)
 
+tgls:Toggle("Auto-Big-Tap",false, function(bool)
+DiscordLib:Notification("Notification", "Auto big tap is Enabled!", "Okay!")
+getgenv().autoTap = bool
+    print("Auto big tap is", bool)
+    if bool then
+        doBigTap();
+    end
+end)
+
 tgls:Toggle("Auto-Rebirth",false, function(bool)
-DiscordLib:Notification("Notification", "Auto rebirt is Enabled!", "Okay!")
+DiscordLib:Notification("Notification", "Auto rebirth is Enabled!", "Okay!")
 getgenv().autoRebirth = bool
     print("Auto rebirth is", bool)
     if bool then
@@ -58,9 +68,18 @@ function doTap()
         while getgenv().autoTap == true do
             local args = {[1] = false,}
             game:GetService("ReplicatedStorage").PlayerClick:FireServer(unpack(args))
-            wait()
+            wait(0.5)
         end
     end)
+end
+
+function doBigTap()
+	spawn(function()
+		while getgenv().autoBigTap == true do
+			game:GetService("ReplicatedStorage").TapSplosion:InvokeServer()
+			wait()
+		end
+	end)
 end
 
 function doRebirth()
