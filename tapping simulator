@@ -42,7 +42,7 @@ getgenv().autoTap = bool
 end)
 
 tgls:Toggle("Auto-Rebirth",false, function(bool)
-DiscordLib:Notification("Notification", "Auto rebirth is Enabled!", "Okay!")
+DiscordLib:Notification("Notification", "Auto rebirth is works/don't works!", "Okay!")
 getgenv().autoRebirth = bool
     print("Auto rebirth is", bool)
     if bool then
@@ -54,7 +54,7 @@ local pet = serv:Channel("Pet")
 
 getgenv().autoOpenPet = true;
 
-pet:Toggle("Auto-Open-Pet",false, function(bool)
+pet:Toggle("Auto-Open-Basic-Pet",false, function(bool)
 DiscordLib:Notification("Notification", "Auto open pet is Enabled!", "Okay!")
 getgenv().autoOpenPet = bool
     print("Auto open pet is", bool)
